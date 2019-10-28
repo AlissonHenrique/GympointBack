@@ -1,0 +1,12 @@
+// arquivo utilizado para mostrar ao sequilize que fizemos alterações
+// no path padrão de desenvolvimento
+
+const path = require('path')
+
+// caminhos novos
+module.exports = {
+  config: path.resolve('src', 'config', 'database.js'),
+  'models-path': path.resolve('src', 'app', 'models'),
+  'seeders-path': path.resolve('src', 'database', 'seeders'),
+  'migrations-path': path.resolve('src', 'database', 'migrations')
+}
