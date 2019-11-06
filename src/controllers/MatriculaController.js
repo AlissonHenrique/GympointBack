@@ -1,3 +1,4 @@
+import { startOfToday, parseISO, isBefore } from 'date-fns';
 import Matricula from '../models/Matricula';
 
 class MatriculaController {
@@ -7,6 +8,13 @@ class MatriculaController {
   }
 
   async store(req, res) {
+    const { start_date } = req.body;
+
+    // / verifica se a data é antes da atual
+    const startMes = startOfToday(parseISO(start_date));
+    if (isBefore(startMes, new Date())) {
+      return res.status(400).json({ error: 'Esta data não é permitida' });
+    }
     const response = await Matricula.create(req.body);
     return res.json(response);
   }
