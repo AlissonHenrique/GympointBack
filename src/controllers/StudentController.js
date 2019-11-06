@@ -21,6 +21,17 @@ class StudentController {
     );
     return res.json({ id, nome, email, peso, idade, altura });
   }
+
+  async delete(req, res) {
+    const study = await Student.findByPk(req.params.id);
+    if (study.id !== req.userId) {
+      return res.status(401).json({
+        error: 'Voce não tem premição ',
+      });
+    }
+
+    return res.json(study);
+  }
 }
 
 export default new StudentController();
