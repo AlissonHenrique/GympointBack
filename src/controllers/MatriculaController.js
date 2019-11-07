@@ -15,6 +15,7 @@ class MatriculaController {
     if (isBefore(startMes, new Date())) {
       return res.status(400).json({ error: 'Esta data não é permitida' });
     }
+
     const response = await Matricula.create(req.body);
     return res.json(response);
   }
