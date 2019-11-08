@@ -27,6 +27,7 @@ routes.delete('/mat/:id', MatriculaController.delete);
 routes.post('/students/:id/checkins', CheckinController.store);
 routes.get('/students/:id/checkins', CheckinController.index);
 
-routes.post('/help', HelpController.store);
+routes.post('/help/:id/help-orders', HelpController.store);
 routes.get('/help/:id/help-orders', HelpController.index);
+
 export default routes;

@@ -4,9 +4,8 @@ class Help extends Model {
   static init(sequelize) {
     super.init(
       {
+        student_id: Sequelize.INTEGER,
         question: Sequelize.STRING,
-        answer: Sequelize.INTEGER,
-        answer_at: Sequelize.DATE,
       },
       {
         sequelize,

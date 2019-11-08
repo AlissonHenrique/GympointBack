@@ -16,7 +16,11 @@ class HelpController {
   }
 
   async store(req, res) {
-    const response = await Help.create(req.body);
+    const { question } = req.body;
+    const response = await Help.create({
+      student_id: req.params.id,
+      question,
+    });
     return res.json(response);
   }
 }
