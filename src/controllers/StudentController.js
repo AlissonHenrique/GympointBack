@@ -3,7 +3,7 @@ import Student from '../models/Student';
 class StudentController {
   async index(req, res) {
     const reponse = await Student.findAll({
-      attributes: ['id', 'name', 'email', 'peso', 'idade', 'altura'],
+      attributes: ['id', 'nome', 'email', 'peso', 'idade', 'altura'],
     });
     return res.json(reponse);
   }
