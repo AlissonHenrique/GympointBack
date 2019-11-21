@@ -3,8 +3,15 @@ import Student from '../models/Student';
 class StudentController {
   async index(req, res) {
     const reponse = await Student.findAll({
-      attributes: ['id', 'nome', 'email', 'peso', 'idade', 'altura'],
+      where: {
+        id: req.params.id,
+      },
     });
+    return res.json(reponse);
+  }
+
+  async index2(req, res) {
+    const reponse = await Student.findAll({});
     return res.json(reponse);
   }
 
@@ -23,14 +30,9 @@ class StudentController {
   }
 
   async delete(req, res) {
-    const study = await Student.findByPk(req.params.id);
-    if (study.id !== req.userId) {
-      return res.status(401).json({
-        error: 'Voce não tem premição ',
-      });
-    }
+    await Student.destroy({ where: { id: req.params.id } });
 
-    return res.json(study);
+    return res.json({ msg: `id deletado com sucesso ` });
   }
 }
 

@@ -13,15 +13,12 @@ class PlansController {
     return res.json(response);
   }
 
-  async delete(req, res) {
-    const plan = await Plans.findByPk(req.params.id);
-    if (plan.id !== req.userId) {
-      return res.status(401).json({
-        error: 'Voce não tem premição ',
-      });
-    }
+  async update(req, res) {}
 
-    return res.json(plan);
+  async delete(req, res) {
+    await Plans.destroy({ where: { id: req.params.id } });
+
+    return res.json({ msg: `id deletado com sucesso ` });
   }
 }
 
