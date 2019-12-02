@@ -1,5 +1,6 @@
 import { startOfToday, parseISO, isBefore } from 'date-fns';
 import Matricula from '../models/Matricula';
+import Mail from '../mail/mail';
 
 class MatriculaController {
   async index(req, res) {

@@ -2,17 +2,13 @@ import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
-    const reponse = await Student.findAll({
-      where: {
-        id: req.params.id,
-      },
-    });
-    return res.json(reponse);
-  }
+    const studentid = await Student.findByPk(req.params.id);
+    if (studentid) {
+      return res.json(studentid);
+    }
 
-  async index2(req, res) {
-    const reponse = await Student.findAll({});
-    return res.json(reponse);
+    const reponse = await Student.findAll();
+    return res.json({ reponse });
   }
 
   async store(req, res) {
@@ -27,6 +23,12 @@ class StudentController {
       req.body
     );
     return res.json({ id, nome, email, peso, idade, altura });
+  }
+
+  async update(req, res) {
+    const user = await Student.findByPk(req.params.id);
+    const response = await user.update(req.body);
+    return res.json({ response });
   }
 
   async delete(req, res) {

@@ -2,10 +2,12 @@ import Plans from '../models/Plans';
 
 class PlansController {
   async index(req, res) {
-    const reponse = await Plans.findAll({
-      attributes: ['id', 'title', 'duration', 'price'],
-    });
-    return res.json(reponse);
+    const planid = await Plans.findByPk(req.params.id);
+    if (planid) {
+      return res.json({ planid });
+    }
+    const reponse = await Plans.findAll({});
+    return res.json({ reponse });
   }
 
   async store(req, res) {
@@ -13,7 +15,11 @@ class PlansController {
     return res.json(response);
   }
 
-  async update(req, res) {}
+  async update(req, res) {
+    const pl = await Plans.findByPk(req.params.id);
+    const response = await pl.update(req.body);
+    return res.json({ response });
+  }
 
   async delete(req, res) {
     await Plans.destroy({ where: { id: req.params.id } });
