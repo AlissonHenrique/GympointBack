@@ -1,10 +1,9 @@
 import Help from '../models/Help';
-import Student from '../models/Student'
+import Student from '../models/Student';
+
 class HelpController {
   async index(req, res) {
-    const reponse = await Help.findAll({
-
-    });
+    const reponse = await Help.findAll({});
     return res.json(reponse);
   }
 

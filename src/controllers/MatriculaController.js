@@ -1,25 +1,32 @@
-import { startOfToday, parseISO, isBefore } from 'date-fns';
+// import { startOfToday, parseISO, isBefore } from 'date-fns';
 import Matricula from '../models/Matricula';
-import Mail from '../mail/mail';
+import Student from '../models/Student';
 
 class MatriculaController {
   async index(req, res) {
-    const reponse = await Matricula.findByPk(req.params.id);;
-    if (reponse) {
-      return res.json(reponse);
-    }
-    return res.json(reponse);
+    // const reponse = await Matricula.findByPk(req.params.id);
+    // if (reponse) {
+    //   return res.json(reponse);
+    // }
+    const repo = await Matricula.findAll({
+      include: [
+        {
+          model: Student,
+          as: 'student',
+        },
+      ],
+    });
+
+    return res.json(repo);
   }
 
   async store(req, res) {
-    const { start_date } = req.body;
+    // const { start_date } = req.body;
 
-    // / verifica se a data é antes da atual
-    const startMes = startOfToday(parseISO(start_date));
-    if (isBefore(startMes, new Date())) {
-      return res.status(400).json({ error: 'Esta data não é permitida' });
-    }
-
+    // const startMes = startOfToday(parseISO(start_date));
+    // if (isBefore(startMes, new Date())) {
+    //   return res.status(400).json({ error: 'Esta data não é permitida' });
+    // }
     const response = await Matricula.create(req.body);
     return res.json(response);
   }

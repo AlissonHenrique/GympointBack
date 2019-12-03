@@ -27,8 +27,8 @@ routes.put('/student/:id', StudentController.update);
 routes.delete('/student/:id', StudentController.delete);
 
 routes.post('/mat', MatriculaController.store);
-routes.get('/mat', MatriculaController.index);
 routes.get('/mat/:id', MatriculaController.index);
+routes.get('/mat', MatriculaController.index);
 routes.delete('/mat/:id', MatriculaController.delete);
 
 routes.post('/students/:id/checkins', CheckinController.store);
