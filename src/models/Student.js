@@ -15,5 +15,6 @@ class Student extends Model {
       }
     );
   }
+
 }
 export default Student;

@@ -4,7 +4,10 @@ import Mail from '../mail/mail';
 
 class MatriculaController {
   async index(req, res) {
-    const reponse = await Matricula.findAll();
+    const reponse = await Matricula.findByPk(req.params.id);;
+    if (reponse) {
+      return res.json(reponse);
+    }
     return res.json(reponse);
   }
 

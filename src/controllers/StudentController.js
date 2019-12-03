@@ -8,7 +8,7 @@ class StudentController {
     }
 
     const reponse = await Student.findAll();
-    return res.json({ reponse });
+    return res.json(reponse);
   }
 
   async store(req, res) {

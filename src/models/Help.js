@@ -13,5 +13,6 @@ class Help extends Model {
       }
     );
   }
+
 }
 export default Help;

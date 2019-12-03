@@ -4,10 +4,10 @@ class PlansController {
   async index(req, res) {
     const planid = await Plans.findByPk(req.params.id);
     if (planid) {
-      return res.json({ planid });
+      return res.json(planid);
     }
-    const reponse = await Plans.findAll({});
-    return res.json({ reponse });
+    const reponse = await Plans.findAll();
+    return res.json(reponse);
   }
 
   async store(req, res) {
@@ -18,7 +18,7 @@ class PlansController {
   async update(req, res) {
     const pl = await Plans.findByPk(req.params.id);
     const response = await pl.update(req.body);
-    return res.json({ response });
+    return res.json(response);
   }
 
   async delete(req, res) {

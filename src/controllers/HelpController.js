@@ -1,9 +1,11 @@
 import Help from '../models/Help';
-
+import Student from '../models/Student'
 class HelpController {
   async index(req, res) {
-    const reponse = await Help.findByPk(req.params.id);
-    return res.json({ reponse });
+    const reponse = await Help.findAll({
+
+    });
+    return res.json(reponse);
   }
 
   async store(req, res) {
