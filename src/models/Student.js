@@ -16,6 +16,5 @@ class Student extends Model {
     );
     return this;
   }
-
 }
 export default Student;

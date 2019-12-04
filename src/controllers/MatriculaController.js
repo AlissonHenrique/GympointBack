@@ -1,4 +1,4 @@
-import { startOfToday, parseISO, isBefore } from 'date-fns';
+// import { startOfToday, parseISO, isBefore } from 'date-fns';
 import Matricula from '../models/Matricula';
 import Student from '../models/Student';
 
@@ -30,6 +30,10 @@ class MatriculaController {
     //   return res.status(400).json({ error: 'Esta data não é permitida' });
     // }
 
+    // const startMes = startOfToday(parseISO(start_date));
+    // if (isBefore(startMes, new Date())) {
+    //   return res.status(400).json({ error: 'Esta data não é permitida' });
+    // }
     const response = await Matricula.create(req.body);
     return res.json(response);
   }
