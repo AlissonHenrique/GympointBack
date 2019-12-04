@@ -6,13 +6,15 @@ class Help extends Model {
       {
         student_id: Sequelize.INTEGER,
         question: Sequelize.STRING,
-        answer: Sequelize.STRING,
       },
       {
         sequelize,
       }
     );
+    return this;
   }
-
+  static associate(models) {
+    this.belongsTo(models.Student, { foreignKey: 'student_id', as: 'student' })
+  }
 }
 export default Help;

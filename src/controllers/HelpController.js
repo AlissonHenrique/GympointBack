@@ -3,7 +3,11 @@ import Student from '../models/Student'
 class HelpController {
   async index(req, res) {
     const reponse = await Help.findAll({
-
+      include: [{
+        model: Student,
+        as: 'student',
+        attributes: ['nome']
+      }]
     });
     return res.json(reponse);
   }

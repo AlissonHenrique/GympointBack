@@ -10,6 +10,7 @@ class Checkin extends Model {
         sequelize,
       }
     );
+    return this;
   }
 }
 export default Checkin;
