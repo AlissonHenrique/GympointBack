@@ -17,15 +17,15 @@ module.exports = {
         unique: true,
       },
       idade: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       peso: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       altura: {
-        type: Sequelize.DECIMAL,
+        type: Sequelize.STRING,
         allowNull: false,
       },
 

@@ -28,7 +28,7 @@ class StudentController {
   async update(req, res) {
     const user = await Student.findByPk(req.params.id);
     const response = await user.update(req.body);
-    return res.json({ response });
+    return res.json(response);
   }
 
   async delete(req, res) {
