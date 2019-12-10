@@ -1,7 +1,7 @@
 // import { startOfToday, parseISO, isBefore } from 'date-fns';
 import Matricula from '../models/Matricula';
 import Student from '../models/Student';
-
+import Plans from '../models/Plans';
 
 class MatriculaController {
   async index(req, res) {
@@ -10,13 +10,18 @@ class MatriculaController {
       return res.json(reponse);
     }
     const repo = await Matricula.findAll({
+      attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
       include: [{
         model: Student,
         as: 'student',
         attributes: ['nome']
       }
-      ],
-
+        , {
+        model: Plans,
+        as: 'plan',
+        attributes: ['title']
+      }
+      ]
     });
     return res.json(repo);
   }
