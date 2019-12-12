@@ -7,9 +7,10 @@ class MatriculaController {
   async index(req, res) {
     const reponse = await Matricula.findByPk(req.params.id);
     if (reponse) {
-      const repo = await Matricula.findAll({
+
+      const response = await Matricula.findOne({
         where: { id: req.params.id },
-        attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
+        atributes: ['id', 'start_date', 'end_date', 'price', 'active', 'student_id'],
         include: [
           {
             model: Student,
@@ -23,8 +24,9 @@ class MatriculaController {
           },
         ],
       })
-      return res.json(repo)
+      return res.json(response)
     }
+
     const repo = await Matricula.findAll({
       attributes: ['id', 'start_date', 'end_date', 'price', 'active'],
       include: [
