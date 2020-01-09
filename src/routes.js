@@ -1,19 +1,23 @@
 import { Router } from 'express';
 
-import Usercontroller from './controllers/UserController';
-import SessionController from './controllers/SessionController';
-import PlansController from './controllers/PlansController';
-import StudentController from './controllers/StudentController';
-import MatriculaController from './controllers/MatriculaController';
-import CheckinController from './controllers/CheckinController';
-import HelpController from './controllers/HelpController';
-import authMiddleware from './middlewares/auth';
+import Usercontroller from './app/controllers/UserController';
+import SessionController from './app/controllers/SessionController';
+import PlansController from './app/controllers/PlansController';
+import StudentController from './app/controllers/StudentController';
+import MatriculaController from './app/controllers/MatriculaController';
+import CheckinController from './app/controllers/CheckinController';
+import HelpController from './app/controllers/HelpController';
+import PasswordController from './app/controllers/PasswordController';
+import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
 routes.post('/users', Usercontroller.store);
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
+
+routes.put('/users', Usercontroller.update);
+routes.post('/forget_password', PasswordController.store);
 routes.post('/plans', PlansController.store);
 routes.get('/plans', PlansController.index);
 routes.get('/plans/:id', PlansController.index);

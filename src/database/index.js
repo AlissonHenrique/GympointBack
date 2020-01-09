@@ -1,11 +1,12 @@
 import Sequelize from 'sequelize';
-import User from '../models/User';
-import Plans from '../models/Plans';
-import Student from '../models/Student';
-import Matricula from '../models/Matricula';
-import Checkin from '../models/Checkin';
-import Help from '../models/Help';
+import User from '../app/models/User';
+import Plans from '../app/models/Plans';
+import Student from '../app/models/Student';
+import Matricula from '../app/models/Matricula';
+import Checkin from '../app/models/Checkin';
+import Help from '../app/models/Help';
 import databaseConfig from '../config/database';
+
 const models = [User, Plans, Student, Matricula, Checkin, Help];
 
 class Database {
