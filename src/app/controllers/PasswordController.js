@@ -4,51 +4,45 @@ import Mail from '../../mail/mail';
 // /ForgetPassword
 class PasswordController {
   async store(req, res) {
-    try {
-      const { email } = req.body;
-      const emailExist = await User.findOne({
-        where: { email: req.body.email },
-        attributes: ['id', 'email'],
-      });
+    const { email } = req.body;
+    const emailExist = await User.findOne({
+      where: { email: req.body.email },
+      attributes: ['id', 'email'],
+    });
 
-      if (!emailExist) {
-        res.status(401).send({ error: 'email not existe' });
-      }
-
-      const now = new Date();
-      const token = crypto.randomBytes(20).toString('hex');
-      now.setHours(now.getHours() + 1);
-
-      const user = await User.findByPk(emailExist.id);
-
-      const update = await user.update({
-        password_reset_token: token,
-        password_reset_expires: now,
-      });
-
-      await Mail.sendMail(
-        {
-          to: email,
-          subject: 'teste',
-          template: 'forgetpassword',
-          context: {
-            token,
-            url: `${process.env.APP_URL}`,
-          },
-        },
-        err => {
-          if (err) {
-            res
-              .status(400)
-              .send({ error: 'Cannot send forget password email' });
-          }
-          return res.send();
-        }
-      );
-      return res.json(update);
-    } catch (err) {
-      res.status(400).send({ error: 'Erro forgot password' });
+    if (!emailExist) {
+      res.status(401).send({ error: 'email not existe' });
     }
+
+    const now = new Date();
+    const token = crypto.randomBytes(20).toString('hex');
+    now.setHours(now.getHours() + 1);
+
+    const user = await User.findByPk(emailExist.id);
+
+    const update = await user.update({
+      password_reset_token: token,
+      password_reset_expires: now,
+    });
+
+    await Mail.sendMail(
+      {
+        to: email,
+        subject: 'teste',
+        template: 'forgetpassword',
+        context: {
+          token,
+          url: `${process.env.APP_URL}`,
+        },
+      },
+      err => {
+        if (err) {
+          res.status(400).send({ error: 'Cannot send forget password email' });
+        }
+        return res.send();
+      }
+    );
+    return res.json(update);
   }
 
   async update(req, res) {
