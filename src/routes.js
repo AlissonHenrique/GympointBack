@@ -14,10 +14,11 @@ const routes = new Router();
 routes.post('/users', Usercontroller.store);
 routes.post('/sessions', SessionController.store);
 
-routes.use(authMiddleware);
-
-routes.put('/users', Usercontroller.update);
 routes.post('/forget_password', PasswordController.store);
+routes.put('/reset_password', PasswordController.update);
+
+routes.use(authMiddleware);
+routes.put('/users', Usercontroller.update);
 routes.post('/plans', PlansController.store);
 routes.get('/plans', PlansController.index);
 routes.get('/plans/:id', PlansController.index);
